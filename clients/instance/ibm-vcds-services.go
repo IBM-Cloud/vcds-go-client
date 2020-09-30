@@ -23,9 +23,8 @@ func NewIBMVCDServicesClient(sess *ibmvcdsession.IBMVCDSession) *IBMVCDServices 
 func (f *IBMVCDServices) GetV1ServiceCatalog(transactionid string, timeout time.Duration) (*models.ServiceCatalog, string, error) {
 	log.Printf("calling the Get V1 Service Catalog ")
 	params := services.NewControllersPublicV1ProxyGetServiceCatalogListParamsWithTimeout(timeout).WithXGlobalTransactionID(&transactionid)
-
 	resp, err := f.session.VCDS.Services.ControllersPublicV1ProxyGetServiceCatalogList(params)
-
+	log.Printf("the First Element in the service catalog is %s", resp.Payload.ServicesCatalog[0].Name)
 	if err != nil {
 		log.Printf("failed to get the dc for this customer")
 		return nil, transactionid, fmt.Errorf("failed to get the service catalog %v", err)
