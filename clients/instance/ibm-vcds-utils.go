@@ -58,7 +58,7 @@ func (f *IBMVCDUtils) GetV1ExistingLocations(transactionid string, timeout time.
 
 	if err != nil {
 		log.Printf("failed to get the locations for this customer")
-		return nil, transactionid, fmt.Errorf("failed to get the locations")
+		return nil, transactionid, fmt.Errorf("failed to get the locations %v", err)
 	}
 	return resp.Payload, resp.XGlobalTransactionID, nil
 }
@@ -73,7 +73,7 @@ func (f *IBMVCDUtils) GetV1ExistingMzrLocations(transactionid string, timeout ti
 
 	if err != nil {
 		log.Printf("failed to get the mzr locations for this customer")
-		return nil, fmt.Errorf("failed to get the mzr locations")
+		return nil, fmt.Errorf("failed to get the mzr locations %v", err)
 	}
 	return resp.Payload, nil
 }
@@ -88,7 +88,7 @@ func (f *IBMVCDUtils) GetV1ExistingRam(transactionid string, timeout time.Durati
 
 	if err != nil {
 		log.Printf("failed to get the ram types  for this customer")
-		return nil, fmt.Errorf("failed to get the ram types")
+		return nil, fmt.Errorf("failed to get the ram types %v", err)
 	}
 	return resp.Payload, nil
 }
@@ -102,8 +102,8 @@ func (f *IBMVCDUtils) GetV1ExistingServerTypes(transactionid string, timeout tim
 	resp, err := f.session.VCDS.Utils.ControllersPublicV2ProxyListServerTypes(params)
 
 	if err != nil {
-		log.Printf("failed to get the ram types  for this customer")
-		return nil, fmt.Errorf("failed to get the ram types")
+		log.Printf("failed to get the server types  for this customer")
+		return nil, fmt.Errorf("failed to get the server types %v", err)
 	}
 	return resp.Payload, nil
 }
@@ -111,14 +111,14 @@ func (f *IBMVCDUtils) GetV1ExistingServerTypes(transactionid string, timeout tim
 //Get the list of supported shared storage tiers as a JSON object, and the key name is "shared_storage_tiers".
 
 func (f *IBMVCDUtils) GetV1ExistingSharedStorageTypes(transactionid string, timeout time.Duration) (*models.DefSharedStorageTiers, error) {
-	log.Printf("calling the getv1existingmzrlocations ")
+	log.Printf("calling the getv1sharedstoragetypes ")
 	params := utils.NewControllersPublicV2ProxyListSharedStorageTiersParamsWithTimeout(timeout).WithXGlobalTransactionID(&transactionid)
 
 	resp, err := f.session.VCDS.Utils.ControllersPublicV2ProxyListSharedStorageTiers(params)
 
 	if err != nil {
 		log.Printf("failed to get the shared storage types for this customer")
-		return nil, fmt.Errorf("failed to get the shared storage types")
+		return nil, fmt.Errorf("failed to get the shared storage types %v", err)
 	}
 	return resp.Payload, nil
 }
@@ -126,14 +126,14 @@ func (f *IBMVCDUtils) GetV1ExistingSharedStorageTypes(transactionid string, time
 // Get the list of available hardware templates as a JSON object, and the key name is "templates".
 
 func (f *IBMVCDUtils) GetV1ExistingTemplates(transactionid string, timeout time.Duration) (*models.DefTemplates, error) {
-	log.Printf("calling the getv1existingmzrlocations ")
+	log.Printf("calling the getv1existingtemplates ")
 	params := utils.NewControllersPublicV2ProxyListTemplatesParamsWithTimeout(timeout).WithXGlobalTransactionID(&transactionid)
 
 	resp, err := f.session.VCDS.Utils.ControllersPublicV2ProxyListTemplates(params)
 
 	if err != nil {
 		log.Printf("failed to get the templates for this customer")
-		return nil, fmt.Errorf("failed to get the templates")
+		return nil, fmt.Errorf("failed to get the templates %v", err)
 	}
 	return resp.Payload, nil
 }
@@ -141,14 +141,14 @@ func (f *IBMVCDUtils) GetV1ExistingTemplates(transactionid string, timeout time.
 //Get the list of supported vSphere versions as a JSON object, and the key name is "vsphere_versions".
 
 func (f *IBMVCDUtils) GetV1ExistingVsphereVersions(transactionid string, timeout time.Duration) (*models.DefVsphereVersions, error) {
-	log.Printf("calling the getv1existingmzrlocations ")
+	log.Printf("calling the getv1existingvsphereversions ")
 	params := utils.NewControllersPublicV2ProxyListVsphereVersionsParamsWithTimeout(timeout).WithXGlobalTransactionID(&transactionid)
 
 	resp, err := f.session.VCDS.Utils.ControllersPublicV2ProxyListVsphereVersions(params)
 
 	if err != nil {
 		log.Printf("failed to get the vsphere versions for this customer")
-		return nil, fmt.Errorf("failed to get the vsphere versions")
+		return nil, fmt.Errorf("failed to get the vsphere versions %v", err)
 	}
 	return resp.Payload, nil
 }

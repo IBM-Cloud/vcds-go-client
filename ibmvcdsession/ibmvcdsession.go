@@ -74,7 +74,7 @@ func New(iamtoken, region string, debug bool, timeout time.Duration, useraccount
 
 	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: false}
 
-	log.Printf("the apiendpoint url for power is %s", vcdsAPIEndpoint)
+	log.Printf("the apiendpoint url for VCD  is %s", vcdsAPIEndpoint)
 	transport := httptransport.New(vcdsAPIEndpoint, "/", []string{"https"})
 	if debug {
 		transport.Debug = debug
