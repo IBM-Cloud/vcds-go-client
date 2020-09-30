@@ -13,8 +13,8 @@ type IBMVCDServices struct {
 	session *ibmvcdsession.IBMVCDSession
 }
 
-func NewIBMVCDServicesClient(sess *ibmvcdsession.IBMVCDSession) *IBMVCDUtils {
-	return &IBMVCDUtils{
+func NewIBMVCDServicesClient(sess *ibmvcdsession.IBMVCDSession) *IBMVCDServices {
+	return &IBMVCDServices{
 		session: sess,
 	}
 }
@@ -28,7 +28,7 @@ func (f *IBMVCDServices) GetV1ServiceCatalog(transactionid string, timeout time.
 
 	if err != nil {
 		log.Printf("failed to get the dc for this customer")
-		return nil, transactionid, fmt.Errorf("failed to get the service catalog")
+		return nil, transactionid, fmt.Errorf("failed to get the service catalog %v", err)
 	}
 	return resp.Payload, resp.XGlobalTransactionID, nil
 }
@@ -43,7 +43,7 @@ func (f *IBMVCDServices) GetV1ServiceInfo(iamtoken, transactionid, serviceid str
 
 	if err != nil {
 		log.Printf("failed to get service catalog details")
-		return nil, transactionid, fmt.Errorf("failed to get the service catalog details")
+		return nil, transactionid, fmt.Errorf("failed to get the service catalog details %v", err)
 	}
 	return resp.Payload, resp.XGlobalTransactionID, nil
 }
